@@ -49,8 +49,64 @@ variable "ip_address" {
   default     = null
 }
 
+variable "is_lock_override" {
+  description = "(Optional) (Updatable) Whether to override locks (if any exist)."
+  type        = bool
+  default     = null
+}
+
+variable "kerberos" {
+  description = "(Optional) (Updatable) Kerberos details needed to create configuration."
+  type = object({
+    kerberos_realm                 = string
+    backup_key_tab_secret_version  = optional(number)
+    current_key_tab_secret_version = optional(number)
+    is_kerberos_enabled            = optional(bool)
+    key_tab_secret_id              = optional(string)
+  })
+  default = null
+}
+
+variable "ldap_idmap" {
+  description = "(Optional) (Updatable) Mount target details about the LDAP ID mapping configuration."
+  type = object({
+    cache_lifetime_seconds          = optional(number)
+    cache_refresh_interval_seconds  = optional(number)
+    group_search_base               = optional(string)
+    negative_cache_lifetime_seconds = optional(number)
+    outbound_connector1id           = optional(string)
+    outbound_connector2id           = optional(string)
+    schema_type                     = optional(string)
+    user_search_base                = optional(string)
+  })
+  default = null
+}
+
+variable "locks" {
+  description = "(Optional) Locks associated with this resource."
+  type = object({
+    type                = string
+    message             = optional(string)
+    related_resource_id = optional(string)
+    time_created        = optional(string)
+  })
+  default = null
+}
+
 variable "nsg_ids" {
   description = "(Optional) (Updatable) A list of Network Security Group [OCIDs](https://docs.cloud.oracle.com/iaas/Content/General/Concepts/identifiers.htm) associated with this mount target. A maximum of 5 is allowed. Setting this to an empty array after the list is created removes the mount target from all NSGs. For more information about NSGs, see [Security Rules](https://docs.cloud.oracle.com/iaas/Content/Network/Concepts/securityrules.htm)."
   type        = list(string)
   default     = []
+}
+
+variable "requested_throughput" {
+  description = "(Optional) (Updatable) Throughput for mount target in Gbps."
+  type        = string
+  default     = null
+}
+
+variable "security_attributes" {
+  description = "(Optional) (Updatable) Security attributes are labels for a resource that can be referenced in a Zero Trust Packet Routing policy to control access to ZPR-supported resources."
+  type        = map(string)
+  default     = null
 }
