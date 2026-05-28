@@ -17,14 +17,15 @@ variable "export_options" {
   description = "(Optional) (Updatable) Export options for the new export."
   type = list(object({
     access                         = optional(string)
-    allowed_auth                   = optional(string)
-    anonymous_gid                  = optional(string)
-    anonymous_uid                  = optional(string)
+    allowed_auth                   = optional(list(string))
+    anonymous_gid                  = optional(number)
+    anonymous_uid                  = optional(number)
     identity_squash                = optional(string)
     is_anonymous_access_allowed    = optional(bool)
     require_privileged_source_port = optional(bool)
     source                         = string
   }))
+  default = []
 }
 
 variable "is_idmap_groups_for_sys_auth" {

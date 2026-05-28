@@ -14,7 +14,7 @@ resource "oci_file_storage_export" "this" {
   }
   is_idmap_groups_for_sys_auth = var.is_idmap_groups_for_sys_auth
   dynamic "locks" {
-    for_each = var.lock[*]
+    for_each = var.locks[*]
     content {
       type                = locks.value.type
       message             = locks.value.message
