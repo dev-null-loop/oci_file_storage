@@ -9,6 +9,7 @@ locals {
 resource "oci_file_storage_file_system" "this" {
   availability_domain           = local.ads[var.availability_domain - 1].name
   compartment_id                = var.compartment_id
+  are_quota_rules_enabled       = var.are_quota_rules_enabled
   clone_attach_status           = var.clone_attach_status
   defined_tags                  = var.defined_tags
   display_name                  = var.display_name
@@ -24,5 +25,6 @@ resource "oci_file_storage_file_system" "this" {
       time_created        = locks.value.time_created
     }
   }
-  source_snapshot_id = var.source_snapshot_id
+  source_snapshot_id   = var.source_snapshot_id
+  detach_clone_trigger = var.detach_clone_trigger
 }

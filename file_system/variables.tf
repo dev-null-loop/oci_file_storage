@@ -3,6 +3,12 @@ variable "availability_domain" {
   type        = number
 }
 
+variable "are_quota_rules_enabled" {
+  description = "(Optional) (Updatable) Specifies the enforcement of quota rules on the file system."
+  type        = bool
+  default     = null
+}
+
 variable "clone_attach_status" {
   description = "(Optional) Specifies whether the clone file system is attached to its parent file system. If the value is set to 'DETACH', then the file system will be created, which is deep copied from the snapshot specified by sourceSnapshotId, else will remain attached to its parent."
   type        = string
@@ -58,5 +64,11 @@ variable "locks" {
 variable "source_snapshot_id" {
   description = "(Optional) The [OCID](https://docs.cloud.oracle.com/iaas/Content/General/Concepts/identifiers.htm) of the snapshot used to create a cloned file system. See [Cloning a File System](https://docs.cloud.oracle.com/iaas/Content/File/Tasks/cloningFS.htm)."
   type        = string
+  default     = null
+}
+
+variable "detach_clone_trigger" {
+  description = "(Optional) (Updatable) An optional property when incremented triggers Detach Clone. Could be set to any integer value."
+  type        = number
   default     = null
 }
